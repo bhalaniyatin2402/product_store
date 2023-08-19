@@ -1,0 +1,16 @@
+.product-quantity-input {
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+  border-radius: 0px;
+}
+
+.product-quantity-dec {
+  background-color: lightcoral;
+  font-weight: bold;
+}
+
+.product-quantity-inc {
+  background-color: lightgreen;
+  font-weight: bold;
+}

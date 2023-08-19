@@ -1,0 +1,29 @@
+.product-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+}
+
+.product-card {
+  padding: 15px;
+  width: 23%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.562);
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+}
+
+.product-image {
+  height: 170px;
+  width: 170px;
+}
+
+.product-to-cart {
+  background-color: lightsalmon;
+}
