@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
-import productReducer from "./productSlice";
+import { fakestoreApi } from "../services/fakestoreApi";
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
-    product: productReducer,
+    [fakestoreApi.reducerPath]: fakestoreApi.reducer,
   },
+  middleware: (gDM) => gDM().concat(fakestoreApi.middleware),
 });
 
 export default store;

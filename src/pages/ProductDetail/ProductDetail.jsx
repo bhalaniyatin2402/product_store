@@ -1,33 +1,39 @@
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { add } from "../../store/cartSlice";
-import useProductDetails from "../../hooks/useProductDetail";
 import IncDecInput from "../../components/IncDecInput/IncDecInput";
+import { useGetProductByIdQuery } from "../../services/fakestoreApi";
 import "./ProductDetail.css";
+import { useEffect, useState } from "react";
 
 function ProductDetail() {
   const { id } = useParams();
+  const [product, setProduct] = useState({});
+  const { data, isLoading, isError } = useGetProductByIdQuery(id);
   const dispatch = useDispatch();
-  const [product, setProduct] = useProductDetails(id);
 
   function handleAdd() {
-    dispatch(add({ ...product.productDetail, quantity: product.quantity }));
+    dispatch(add({ ...product, quantity: product.quantity }));
   }
+
+  useEffect(() => {
+    setProduct({ ...data, quantity: 1 });
+  }, [data]);
+
+  if (isLoading) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+
+  if (isError) return <h2>something went wrong!</h2>;
 
   return (
     <section className="product-detail-container">
       <div className="product-detail-left">
-        <img src={product.productDetail.image} alt="" />
+        <img src={product.image} alt="" />
       </div>
       <div className="product-detail-right">
-        <h2 className="product-detail-title">{product.productDetail.title}</h2>
-        <p className="product-detail-price">{product.productDetail.price}₹</p>
-        <p className="product-detail-category">
-          {product.productDetail.category}
-        </p>
-        <p className="product-detail-description">
-          {product.productDetail.description}
-        </p>
+        <h2 className="product-detail-title">{product.title}</h2>
+        <p className="product-detail-price">{product.price}₹</p>
+        <p className="product-detail-category">{product.category}</p>
+        <p className="product-detail-description">{product.description}</p>
         <IncDecInput
           product={product}
           setProduct={setProduct}

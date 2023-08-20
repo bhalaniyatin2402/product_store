@@ -10,7 +10,7 @@
 - `cart item` - navbar shows no. of cart items
 - `duplication` - duplicate item not add in cart but instead of increase in quantity
 - `global state` - storing cart item in global state using redux toolkit
-- `cache` - fetch product data only one time and store in global state second time stop fetchig using redux toolkit middleware
+- `cache` - fetching data using rtk query and caching data automatic
 
 
 ## npm modules

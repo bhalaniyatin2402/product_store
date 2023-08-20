@@ -1,25 +1,20 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, STATUSES } from "../../store/productSlice";
+import { useGetAllProductsQuery } from "../../services/fakestoreApi";
+import { useDispatch } from "react-redux";
 import { add } from "../../store/cartSlice";
 import { Link } from "react-router-dom";
 import "./Products.css";
 
 function Products() {
   const dispatch = useDispatch();
-  const { data: products, status } = useSelector((state) => state.product);
+  const { data: products, isLoading, isError } = useGetAllProductsQuery();
 
   function handleAdd(product) {
     dispatch(add({ ...product, quantity: 1 }));
   }
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+  if (isLoading) return <h2>Loading...</h2>;
 
-  if (status === STATUSES.LOADING) {
-    return <h2>Loading...</h2>;
-  }
+  if (isError) return <h2>something went wrong!</h2>;
 
   return (
     <div className="product-container">
